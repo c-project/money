@@ -1,0 +1,12 @@
+@(expenseForm : Form[ExpenseItem])
+
+@import helper._
+
+@main("Expense list") {
+    
+    @form(routes.ExpenseController.add) {
+      @inputText(expenseForm("summary"))  
+      @inputText(expenseForm("amount"))
+      <input type="submit" value="Delete">
+    }
+}

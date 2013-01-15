@@ -1,0 +1,11 @@
+@(expenseItems: Iterable[ExpenseItem])
+
+@main("Expense list") {
+    
+    @for(expense <- expenseItems) { 
+    
+ 	   <a href="@routes.ExpenseController.show(expense.id)">@expense.summary</a></br>
+    
+	}
+    
+}
