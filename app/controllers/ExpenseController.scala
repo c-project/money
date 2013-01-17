@@ -12,6 +12,7 @@ object ExpenseController extends Controller {
   val expenseForm = Form(
       mapping (
         "id" -> ignored(1234),
+        "date" -> date,
         "amount" -> number,
         "summary" -> text,
         "tags" -> optional(text),
@@ -34,12 +35,19 @@ object ExpenseController extends Controller {
   }
   
   def show(id: Int) = Action {
-    Ok(views.html.expense.show(ExpenseItem.get(id)))
+    Ok(views.html.expense.show(id, expenseForm.fill(ExpenseItem.get(id))))
   }
   
   def delete(id: Int) = TODO
   
-  def edit(id: Int) = TODO
+  def edit(id: Int) = Action { implicit request =>
+    expenseForm.bindFromRequest.fold(
+        hasErrors => BadRequest(views.html.expense.show(id, hasErrors)),
+        sucess => {
+          Ok(views.html.expense.show(id, expenseForm.fill(ExpenseItem.edit(expenseForm.bindFromRequest.get))))
+        }
+    )
+  }
   
   def create = Action {
     Ok(views.html.expense.create(expenseForm))

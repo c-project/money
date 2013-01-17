@@ -1,7 +1,21 @@
-@(expense: ExpenseItem)
+@(id: Int, expenseForm: Form[ExpenseItem])
+
+@import helper._
+@import helper.twitterBootstrap._
 
 @main("Expense list") {
     
-    @expense.summary
-    
+    @form(routes.ExpenseController.edit(id)) {
+      @inputDate(expenseForm("date"), 'format -> "dd.MM.yyyy", '_help -> "", '_label -> "Дата")
+      @inputText(expenseForm("summary"), 'placeholder -> "Описание", '_label -> "Описание")
+      @inputText(expenseForm("amount"), 'placeholder -> "Сумма", '_help -> "", '_label -> "Сумма")
+      <input type="submit" value="Сохранить">
+    }
+<!--script>
+      $('.datepicker').datepicker({
+    	  format:'dd.mm.yyyy',
+    	  weekStart:1
+      });
+      
+</script-->
 }

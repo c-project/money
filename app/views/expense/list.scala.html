@@ -1,11 +1,23 @@
 @(expenseItems: Iterable[ExpenseItem])
 
+@import helper.twitterBootstrap._
+
 @main("Expense list") {
     
-    @for(expense <- expenseItems) { 
-    
- 	   <a href="@routes.ExpenseController.show(expense.id)">@expense.summary</a></br>
-    
-	}
+  <div>
+  					<h3>Расходы <small><a href="@routes.ExpenseController.create">Добавить</a></small></h1>
+  </div>  
+    @if(expenseItems.size < 1) {
+    	Нет записей
+    } else {
+    	<table class="table table-hover">
+    		@for(expense <- expenseItems) {
+    			<tr>
+    				<td><a href="@routes.ExpenseController.show(expense.id)">@expense.summary</a></td>
+    				<td>@expense.amount</td>
+    		  </tr>
+    		}
+    	</table>
+    }
     
 }
