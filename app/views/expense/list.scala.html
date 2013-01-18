@@ -1,4 +1,4 @@
-@(expenseItems: Iterable[ExpenseItem])
+@(expenseItems: Iterable[Expense])
 
 @import helper.twitterBootstrap._
 
@@ -13,8 +13,10 @@
     	<table class="table table-hover">
     		@for(expense <- expenseItems) {
     			<tr>
+    				<td>@expense.date.format("dd.MM.yyyy")</td>    				
     				<td><a href="@routes.ExpenseController.show(expense.id)">@expense.summary</a></td>
     				<td>@expense.amount</td>
+    				<td><a href="@routes.ExpenseController.delete(expense.id)">Удалить</a></td>
     		  </tr>
     		}
     	</table>

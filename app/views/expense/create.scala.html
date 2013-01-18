@@ -1,21 +1,35 @@
-@(expenseForm : Form[ExpenseItem])
+@(expenseForm : Form[Expense])
 
 @import helper._
 @import helper.twitterBootstrap._
 
 @main("Expense list") {
-    
+    @expenseForm.errors
+    <div class="visual_search"></div>
     @form(routes.ExpenseController.add) {
-      @inputDate(expenseForm("date"), 'format -> "dd.MM.yyyy", '_help -> "", '_label -> "Дата")
-      @inputText(expenseForm("summary"), 'placeholder -> "Описание", '_label -> "Описание")
-      @inputText(expenseForm("amount"), 'placeholder -> "Сумма", '_help -> "", '_label -> "Сумма")
-      <input type="submit" value="Сохранить">
+        @inputDate(expenseForm("date"), 'format -> "dd.MM.yyyy", '_help -> "", '_label -> "Дата")
+        @inputText(expenseForm("summary"), 'placeholder -> "Описание", '_label -> "Описание")
+        @inputText(expenseForm("amount"), 'placeholder -> "Сумма", '_help -> "", '_label -> "Сумма")
+        @inputText(expenseForm("tags"), 'id -> "tags_input", 'placeholder -> "Теги", '_help -> "", '_label -> "Теги")
+
+        <input type="submit" value="Сохранить">
     }
-<!--script>
-      $('.datepicker').datepicker({
+<script>
+    $(document).ready(function() {
+    var visualSearch = VS.init({
+    container : $('.visual_search'),
+    query     : '',
+    callbacks : {
+    search       : function(query, searchCollection) {},
+    facetMatches : function(callback) {},
+    valueMatches : function(facet, searchTerm, callback) {}
+    }
+    });
+    });
+    /*      $('.datepicker').datepicker({
     	  format:'dd.mm.yyyy',
     	  weekStart:1
       });
-      
-</script-->
+*/
+</script>
 }

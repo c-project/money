@@ -5,10 +5,10 @@
 # Home page
 GET     /                           controllers.Application.index
 GET     /expense/list				controllers.ExpenseController.list
-GET     /expense/:id/show			controllers.ExpenseController.show(id: Int)
-GET     /expense/:id/delete			controllers.ExpenseController.delete(id: Int)
-GET     /expense/:id/edit			controllers.ExpenseController.edit(id: Int)
-GET     /expense/add				controllers.ExpenseController.add
+GET     /expense/:id/show			controllers.ExpenseController.show(id: Long)
+GET     /expense/:id/delete			controllers.ExpenseController.delete(id: Long)
+POST     /expense/:id/edit			controllers.ExpenseController.edit(id: Long)
+POST     /expense/add				controllers.ExpenseController.add
 GET     /expense/create				controllers.ExpenseController.create
 
 # Map static resources from the /public folder to the /assets URL path
